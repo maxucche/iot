@@ -1,1 +1,2 @@
-# Lưu trữ bài tập lớn Iot
+Bài tập lớn Iot 
+Nguyễn Đăng Tùng
