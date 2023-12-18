@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../IOT_project"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "IOT_WEB"
+	}
+}

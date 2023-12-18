@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IOT WEB</title>
+    <!-- Latest compiled and minified CSS -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="main.css">
+
+    <!-- Latest compiled JavaScript -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="./fonts/themify-icons-font/themify-icons/themify-icons.css">
+    <!-- <script src="https://code.highcharts.com/stock/highstock.js"></script> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+
+<body>
+    <div id="header">
+        <div id="menu" class="menu-btn">
+            <i class="menu-icon ti-menu"></i>
+            <ul class="sidebar">
+                <li>Dashboard</li>
+                <li>Profile</li>
+                <li>Sensor Data</li>
+                <li>Action</li>
+            </ul>
+        </div>
+    </div>
+    <div id="dashboard">
+        <div class="container">
+            <div class="item temp" id="tp">
+                <h2>Nhiệt độ</h2>
+                <h3 id="nhietdo">20 độ c</h3>
+            </div>
+            <div class="item humid" id="hm">
+                <h2>Độ ẩm</h2>
+                <h3 id="doam">80%</h3>
+            </div>
+            <div class="item light" id="lt">
+                <h2>Ánh sáng</h2>
+                <h3 id="anhsang">100 lux</h3>
+            </div>
+        </div>
+
+        <div class="container-2">
+            <div class="item-2">
+                <canvas id="chartCanvas">
+
+                </canvas>
+            </div>
+
+            <div class="item-3">
+                <div class="device light">
+                    <img id="led" src="img/images.jpg" alt="Đèn">
+                    <div class="button-container">
+                        <button class="button-class" onclick="buttonONOFF('ledon')">Bật</button>
+                        <button class="button-class" onclick="buttonONOFF('ledoff')">Tắt</button>
+                    </div>
+                </div>
+                <div class="device fan">
+                    <img id="fan" src="img/fan-static2.png" alt="Quạt">
+                    <div class="button-container">
+                        <button class="button-class" onclick="buttonONOFF('fanon')">Bật</button>
+                        <button class="button-class" onclick="buttonONOFF('fanoff')">Tắt</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="profile">
+        <div class="image">
+            <img src="img/PTIT.jpg" alt="ảnh profile">
+        </div>
+        <div class="info">
+            <h2>Họ tên: NGUYỄN ĐĂNG TÙNG</h2>
+            <h2>Lớp: D20CNPM01</h2>
+            <h2>MÃ SV: B20DCCN626</h2>
+        </div>
+    </div>
+    <div id="sensor-data">
+        <div class="sensor_tab">
+            <div style="font-size: 28px; text-align: center; margin-bottom: 10px;">SENSOR HISTORY</div>
+            <div class="feature_table">
+                <div class="time_section">
+                    <div>THỜI GIAN:</div>
+                    <input type="text" id="startTimesensor" style="text-align: center; margin: auto">
+                    ->
+                    <input type="text" id="endTimesensor" style="text-align: center; margin: auto">
+                    <button id="btnDTSS">SEARCH</button>
+                </div>
+                <div class="sort_section">
+                    <div>SẮP XẾP:</div>
+                    <select id="selectSensor" style="width: 80px">
+                        <option value="id">id</option>
+                        <option value="device_id">device_id</option>
+                        <option value="humidity">humidity</option>
+                        <option value="temperature">temperature</option>
+                        <option value="light">light</option>
+                        <option value="time">time</option>
+                    </select>
+                    <button id="SU">Tăng</button>
+                    <button id="SD">Giảm</button>
+                </div>
+                <div class="search_section">
+                    <div>TÌM KIẾM</div>
+                    <select id="selectSearch" style="width: 80px">
+                        <option value="id">id</option>
+                        <option value="device_id">device_id</option>
+                        <option value="humidity">humidity</option>
+                        <option value="temperature">temperature</option>
+                        <option value="light">light</option>
+                        <option value="time">time</option>
+                    </select>
+                    <input type="text" id="inputSSensor">
+                    <button id="btnSSensor">SEARCH</button>
+                </div>
+            </div>
+        </div>
+        <table id="sensor_table">
+            <thead>
+                <tr>
+                    <td>Device_id</td>
+                    <td>Humidity</td>
+                    <td>Temperature</td>
+                    <td>Light</td>
+                    <td>Time</td>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <div style="font-size: 20px; margin-left: calc(100%/2 - 100px);">
+            <button id="page-back-sensor" style="font-size: 20px;">Back</button>
+            <label for="page-selector-sensor" style="font-size: 20px;"></label>
+            <select id="page-selector-sensor" style="font-size: 20px;"> </select>
+            <button id="page-next-sensor" style="font-size: 20px;">Next</button>
+        </div>
+    </div>
+    <div id="action-data">
+        <div class="action_tab">
+            <div style="font-size: 28px; text-align: center; margin-bottom: 10px;">ACTION HISTORY</div>
+            <div class="feature_table">
+                <div class="time_section">
+                    <div>THỜI GIAN:</div>
+                    <input type="text" id="startTimeaction" style="text-align: center; margin: auto">
+                    ->
+                    <input type="text" id="endTimeaction" style="text-align: center; margin: auto">
+                    <button id="btnDTAC">Tìm</button>
+                </div>
+            </div>
+        </div>
+        <table id="action_table">
+            <thead>
+                <tr>
+                    <td>Device_ID</td>
+                    <td>Status</td>
+                    <td>Time</td>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <div style="font-size: 20px; margin-left: calc(100%/2 - 100px);">
+            <button id="page-back-action" style="font-size: 20px;">Back</button>
+            <label for="page-selector-action" style="font-size: 20px;"></label>
+            <select id="page-selector-action" style="font-size: 20px;"> </select>
+            <button id="page-next-action" style="font-size: 20px;">Next</button>
+        </div>
+    </div>
+    <script src="script.js">
+        
+    </script>
+</body>
+
+</html>
